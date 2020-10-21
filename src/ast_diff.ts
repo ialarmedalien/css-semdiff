@@ -24,6 +24,7 @@ export function astDiff(a: css.Stylesheet, b: css.Stylesheet): AstDiffResult {
 }
 
 function astDiffImpl(nodesA: css.Node[], nodesB: css.Node[]): AstDiffResult {
+
   const uniformedNodesA = flatMap(nodesA, uniformNode);
   const uniformedNodesB = flatMap(nodesB, uniformNode);
 

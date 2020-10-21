@@ -38,7 +38,7 @@ export function hashNode(node: css.Node): string {
 
 
 /**
- * Returns nodes that separated a slector group by their selectors.
+ * Returns nodes that separated a selector group by their selectors.
  * We can equate the selector group 'a, b { ... }' to
  * the group 'b, a { ... }' and the group 'a { ... } b { ... }'.
  *
@@ -52,6 +52,18 @@ export function hashNode(node: css.Node): string {
  *     b { color: red; }
  */
 export function uniformNode(node: css.Node): css.Node[] {
+  console.log('node:')
+  console.log(node)
+  if (node.declarations) {
+    node.declarations.forEach(e => {
+      if (e.type === 'comment') {
+        return e
+      }
+      e.value = e.value.toLowerCase()
+      return e
+    })
+  }
+
   if (isRuleNode(node)) {
     return uniformRuleNode(node);
   }

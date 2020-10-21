@@ -11,6 +11,31 @@ describe("astDiff", () => {
     assert(!result.changed);
   });
 
+  it("should find no differences if the only changes are comments", () => {
+    const styleSheetA = css.parse("a { color: red; background-color: green; /* this is a comment */ }");
+    const styleSheetB = css.parse("a { color: red; /* wtf?! so is this! */ background-color: green; }");
+
+    const result = astDiff(styleSheetA, styleSheetB);
+    assert(!result.changed);
+  });
+
+  it("should ignore case differences", () => {
+    const styleSheetA = css.parse("a { color: #FFFFFF }");
+    const styleSheetB = css.parse("b { color: #ffffff }");
+
+    const result = astDiff(styleSheetA, styleSheetB);
+    assert(!result.changed);
+  });
+
+  it("should ignore the type of quotation marks used", () => {
+    const styleSheetA = css.parse("a { font: \"Roboto\" }");
+    const styleSheetB = css.parse("a { font: 'Roboto' }");
+
+    const result = astDiff(styleSheetA, styleSheetB);
+    assert(!result.changed);
+  });
+
+
   it("should return extra nodes when the last StyleSheet has an extra node", () => {
     const styleSheetA = css.parse("");
     const styleSheetB = css.parse(".extra { display: none; }");

@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@types/commander": "^2.3.30",
-    "@types/css": "0.0.30",
+    "@types/css": "^0.0.31",
     "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.45",
     "assert-polyfill": "0.0.0",
